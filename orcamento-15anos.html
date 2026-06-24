@@ -471,21 +471,26 @@
     .extras-cards { grid-template-columns: 1fr; }
   }
 
-  /* ---------- ADMIN HINT ---------- */
-  .admin-hint {
+  /* ---------- PERSUASION ---------- */
+  .persuasion {
     text-align: center;
-    margin: 30px 0 10px;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
+    margin: 40px auto 20px;
+    max-width: 600px;
+    padding: 20px 24px;
+    background: linear-gradient(180deg, rgba(212,165,116,.06), transparent);
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
   }
-  .admin-hint a {
-    color: var(--muted);
-    text-decoration: underline dotted;
-    cursor: pointer;
+  .persuasion strong {
+    color: var(--accent);
+    font-weight: 600;
+    font-style: normal;
   }
-  .admin-only { display: none; }
-  .admin-only.show { display: block; }
 
   /* ---------- EXTRAS DESTAQUE ---------- */
   .extras-title h3 {
@@ -719,7 +724,7 @@
   @media print {
     body { background: #fff; color: #000; }
     .page { padding: 20px; max-width: 100%; }
-    .cta-wrap, .crm, .form-actions, .btn, .admin-hint, .admin-only { display: none !important; }
+    .cta-wrap, .crm, .form-actions, .btn, .admin-hint, .admin-only, .persuasion { display: none !important; }
     .items, .pkg, .stage, .client, .notes, .approval { background: #fff; border-color: #ddd; color: #000; }
     .items tbody td, .items thead th { border-color: #ddd; }
     .items .desc span, .pkg ul li, .stage p, .notes, footer, .field label { color: #444; }
@@ -958,8 +963,9 @@
     </div>
 
     <div class="approval">
-      <h3>Preencha seus dados para aprovar</h3>
-      <p class="sub">Ao enviar, Paulo Anderson recebe sua aprovação no painel dele. Você recebe um e-mail de confirmação.</p>
+      <h3>Garanta sua data</h3>
+      <p class="sub">Preencha seus dados e envie agora — você recebe o contrato no seu e-mail em segundos. <strong>⏳ Proposta válida por 15 dias.</strong></p>
+      <p class="persuasion">Você só vai viver este momento uma vez. <strong>Que ele fique eternizado.</strong></p>
 
       <form id="approval-form" class="form-grid" autocomplete="on">
         <div class="field">
@@ -1013,38 +1019,6 @@
           <span id="form-status" class="form-status"></span>
         </div>
       </form>
-    </div>
-  </div>
-
-  <!-- LINK DISCRETO PARA ADMIN -->
-  <p class="admin-hint">
-    Paulo Anderson? <a id="admin-toggle">Acessar painel administrativo</a>
-  </p>
-
-  <!-- MINI-CRM (admin only) -->
-  <div class="admin-only" id="crm-section">
-    <div class="section" style="margin-top:0;">
-      <div class="section-title">
-        <span class="num">A</span>
-        <h3>Painel Administrativo</h3>
-        <span class="line"></span>
-      </div>
-      <div class="crm">
-        <div class="crm-header">
-          <div>
-            <h3>Clientes cadastrados</h3>
-            <small>Conectado ao Supabase · leitura em tempo real</small>
-          </div>
-          <div class="crm-actions">
-            <button class="btn" id="btn-refresh">↻ Atualizar</button>
-            <button class="btn" id="btn-export">⬇ Exportar JSON</button>
-            <button class="btn" id="btn-clear">Limpar tudo</button>
-          </div>
-        </div>
-        <div class="crm-list" id="crm-list">
-          <div class="crm-empty">Carregando…</div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -1147,13 +1121,7 @@
   $('#f-sessao').addEventListener('change', recalc);
   recalc();
 
-  // ---- admin toggle ----
-  $('#admin-toggle').addEventListener('click', e => {
-    e.preventDefault();
-    $('#crm-section').classList.toggle('show');
-    if($('#crm-section').classList.contains('show')) loadCRM();
-  });
-
+  // ---- setStatus helper ----
   function setStatus(msg, cls=''){
     const el = $('#form-status');
     el.textContent = msg;
@@ -1213,7 +1181,6 @@
         f.reset();
         $('#f-data').value = '2026-07-11';
         recalc();
-        if($('#crm-section').classList.contains('show')) loadCRM();
       }
     }catch(err){
       console.error(err);
@@ -1222,101 +1189,6 @@
       btn.disabled = false;
       btn.textContent = 'Enviar';
     }
-  });
-
-  // ---- CRM admin ----
-  async function loadCRM(){
-    const list = $('#crm-list');
-    if(!sb){
-      list.innerHTML = '<div class="crm-empty">⚠ Supabase não configurado. Edite as constantes SUPABASE_URL e SUPABASE_ANON no final do HTML.</div>';
-      return;
-    }
-    list.innerHTML = '<div class="crm-empty">Carregando…</div>';
-    const { data, error } = await sb
-      .from('clientes')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(200);
-    if(error){
-      list.innerHTML = '<div class="crm-empty">Erro: ' + escapeHtml(error.message) + '</div>';
-      return;
-    }
-    if(!data || !data.length){
-      list.innerHTML = '<div class="crm-empty">Nenhum cliente cadastrado ainda.</div>';
-      return;
-    }
-    const rows = data.map(c => {
-      const status = (c.status || 'novo').toLowerCase();
-      const tagClass = {
-        novo:'tag-novo', aprovado:'tag-aprov', pendente:'tag-pend', recusado:'tag-recus'
-      }[status] || 'tag-novo';
-      const statusLabel = {novo:'Novo', aprovado:'Aprovado', pendente:'Pendente', recusado:'Recusado'}[status] || 'Novo';
-      const extras = c.extras_nomes
-        ? '<small style="color:var(--muted);">' + escapeHtml(c.extras_nomes) + '</small>'
-        : '—';
-      return `
-        <tr data-id="${escapeHtml(c.id)}">
-          <td><strong>${escapeHtml(c.nome)}</strong><br><small style="color:var(--muted);">${escapeHtml(c.email||'—')}</small></td>
-          <td>${escapeHtml(c.tel||'—')}</td>
-          <td>${escapeHtml(c.sessao||'—')}<br><small style="color:var(--muted);">${fmtBRL(c.total)}</small></td>
-          <td>${fmtDate(c.data_evento)}<br><small style="color:var(--muted);">${escapeHtml(c.local||'')}</small></td>
-          <td>${extras}</td>
-          <td><span class="tag ${tagClass}">${statusLabel}</span><br><small style="color:var(--muted);">${fmtTs(c.created_at)}</small></td>
-          <td><button class="row-del" data-act="del" title="Excluir">✕</button></td>
-        </tr>`;
-    }).join('');
-
-    list.innerHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>WhatsApp</th>
-            <th>Sessão · Total</th>
-            <th>Data · Local</th>
-            <th>Extras</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`;
-  }
-
-  $('#btn-refresh').addEventListener('click', loadCRM);
-
-  $('#crm-list').addEventListener('click', async function(e){
-    const btn = e.target.closest('[data-act="del"]');
-    if(!btn) return;
-    const tr = btn.closest('tr');
-    const id = tr?.dataset.id;
-    if(!id) return;
-    if(!confirm('Excluir este cliente?')) return;
-    if(!sb) return;
-    const { error } = await sb.from('clientes').delete().eq('id', id);
-    if(error){ alert('Erro: ' + error.message); return; }
-    loadCRM();
-  });
-
-  $('#btn-export').addEventListener('click', async function(){
-    if(!sb){ alert('Supabase não configurado.'); return; }
-    const { data } = await sb.from('clientes').select('*').order('created_at', { ascending: false });
-    if(!data) return;
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'crm-pauleanderson-' + new Date().toISOString().slice(0,10) + '.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-
-  $('#btn-clear').addEventListener('click', async function(){
-    if(!confirm('Apagar TODOS os clientes do CRM?')) return;
-    if(!sb) return;
-    const { error } = await sb.from('clientes').delete().gt('id', 0);
-    if(error){ alert('Erro: ' + error.message); return; }
-    loadCRM();
   });
 
 })();
