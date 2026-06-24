@@ -996,7 +996,7 @@
         </div>
         <div class="field">
           <label for="f-data">Data da festa</label>
-          <input id="f-data" name="data" type="date" value="2026-07-11" />
+          <input id="f-data" name="data" type="date" />
         </div>
         <div class="field">
           <label for="f-local">Local / Salão</label>
@@ -1193,7 +1193,7 @@
           goBtn.style.display = 'inline-flex';
         }
         f.reset();
-        $('#f-data').value = '2026-07-11';
+        $('#f-data').value = '';
         recalc();
       }
     }catch(err){
