@@ -1008,7 +1008,7 @@
         </div>
 
         <div class="form-actions full" style="grid-column: 1 / -1;">
-          <button type="submit" class="btn btn-primary">✉ Enviar aprovação para Paulo Anderson</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
           <a id="btn-go-contract" class="btn" href="#" target="_self" style="display:none;">📄 Ir para o contrato →</a>
           <span id="form-status" class="form-status"></span>
         </div>
@@ -1220,7 +1220,7 @@
       setStatus('Erro ao enviar: ' + (err.message || err), 'err');
     }finally{
       btn.disabled = false;
-      btn.textContent = '✉ Enviar aprovação para Paulo Anderson';
+      btn.textContent = 'Enviar';
     }
   });
 
