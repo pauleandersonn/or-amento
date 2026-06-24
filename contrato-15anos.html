@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contrato · Fotografia & Filmagem — Festa 15 Anos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f10;
+    --bg-2: #151517;
+    --card: #1c1c1f;
+    --line: #2a2a2e;
+    --text: #f2f2f2;
+    --muted: #a0a0a6;
+    --accent: #d4a574;
+    --accent-2: #b8895a;
+    --ok: #5fc88a;
+    --err: #e07b6c;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .logo {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center;
+    font-weight: 700; color: #1a1a1a;
+    font-family: 'Georgia', serif; font-size: 20px;
+  }
+  .brand h1 {
+    font-family: 'Georgia', serif; font-size: 20px;
+    letter-spacing: 1px; font-weight: 500;
+  }
+  .brand small {
+    display: block; font-size: 11px; color: var(--muted);
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 2px;
+  }
+  .doc-info { text-align: right; font-size: 12px; color: var(--muted); }
+  .doc-info strong { color: var(--text); display: block; font-size: 13px; }
+
+  /* ---------- HERO ---------- */
+  .hero { text-align: center; padding: 20px 0 40px; }
+  .hero .eyebrow {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+  }
+  .hero h2 {
+    font-family: 'Georgia', serif; font-size: 38px;
+    font-weight: 400; line-height: 1.15; margin-bottom: 14px;
+  }
+  .hero p { color: var(--muted); max-width: 560px; margin: 0 auto; font-size: 14px; }
+
+  /* ---------- LOADING / ERROR ---------- */
+  .state {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .state .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--line);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .state.err { color: var(--err); }
+
+  /* ---------- SECTIONS ---------- */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px;
+  }
+  .section-title h3 {
+    font-family: 'Georgia', serif; font-size: 22px; font-weight: 400;
+  }
+  .section-title .num {
+    font-size: 11px; letter-spacing: 3px;
+    color: var(--accent); font-weight: 600;
+  }
+  .section-title .line { flex: 1; height: 1px; background: var(--line); }
+
+  /* ---------- PARTIES ---------- */
+  .parties {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .party {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 6px; padding: 20px;
+  }
+  .party .label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px; font-weight: 700;
+  }
+  .party h4 {
+    font-family: 'Georgia', serif; font-size: 18px;
+    font-weight: 400; margin-bottom: 12px;
+  }
+  .party .row {
+    font-size: 13px; color: var(--muted); padding: 4px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .party .row:last-child { border-bottom: none; }
+  .party .row strong { color: var(--text); display: inline-block; min-width: 90px; }
+
+  /* ---------- CLAUSES ---------- */
+  .clause {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 6px; padding: 18px 20px; margin-bottom: 12px;
+  }
+  .clause h5 {
+    font-family: 'Georgia', serif; font-size: 15px;
+    font-weight: 500; color: var(--accent); margin-bottom: 8px;
+  }
+  .clause p { font-size: 13.5px; color: var(--text); }
+  .clause .obs { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* ---------- SUMMARY TABLE ---------- */
+  .summary {
+    width: 100%; border-collapse: collapse;
+    background: var(--card); border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--line); margin-bottom: 16px;
+  }
+  .summary thead th {
+    text-align: left; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    padding: 12px 16px; background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .summary tbody td {
+    padding: 12px 16px; font-size: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .summary tbody tr:last-child td { border-bottom: none; }
+  .summary .total { color: var(--accent); font-weight: 600; }
+  .grand {
+    margin-top: 16px; padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(212,165,116,.12), rgba(212,165,116,.04));
+    border: 1px solid var(--accent); border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .grand .label { font-family: 'Georgia', serif; font-size: 18px; }
+  .grand .value { font-family: 'Georgia', serif; font-size: 26px; color: var(--accent); font-weight: 600; }
+
+  /* ---------- ACEITE ---------- */
+  .aceite {
+    background: var(--card); border: 2px solid var(--accent);
+    border-radius: 8px; padding: 28px 24px;
+    box-shadow: 0 12px 32px rgba(212, 165, 116, .08);
+  }
+  .aceite h3 {
+    font-family: 'Georgia', serif; font-size: 22px;
+    font-weight: 400; margin-bottom: 6px;
+  }
+  .aceite .sub { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+  .aceite .check-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px; background: var(--bg-2);
+    border: 1px solid var(--line); border-radius: 6px;
+    cursor: pointer; margin-bottom: 18px;
+  }
+  .aceite .check-row input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; }
+  .aceite .check-row label { font-size: 14px; color: var(--text); cursor: pointer; }
+  .audit {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-bottom: 22px;
+  }
+  .audit .item {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 6px; padding: 12px 14px;
+  }
+  .audit .item .k {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .audit .item .v {
+    font-size: 14px; color: var(--text);
+    font-family: 'Georgia', serif; word-break: break-all;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg-2);
+    color: var(--text); transition: all .2s ease; text-decoration: none;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-primary {
+    background: var(--accent); color: #1a1a1a; border-color: var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-wa { background: #25d366; border-color: #25d366; color: #fff; }
+  .btn-wa:hover { background: #1ebe5b; border-color: #1ebe5b; color: #fff; }
+  .status { margin-left: auto; font-size: 12px; color: var(--muted); }
+  .status.ok { color: var(--ok); }
+  .status.err { color: var(--err); }
+
+  .aceite.done {
+    border-color: var(--ok);
+    background: linear-gradient(180deg, rgba(95,200,138,.08), transparent);
+  }
+  .aceite.done h3::before { content: "✓ "; color: var(--ok); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 24px; text-align: center;
+    font-size: 12px; color: var(--muted);
+  }
+  footer .sign {
+    font-family: 'Georgia', serif; font-style: italic;
+    font-size: 22px; color: var(--accent); margin-bottom: 6px;
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    body { background: #fff; color: #000; }
+    .page { padding: 20px; max-width: 100%; }
+    .actions, .state, .btn { display: none !important; }
+    .clause, .party, .summary, .aceite, header, .grand {
+      background: #fff; border-color: #ddd; color: #000;
+    }
+    .aceite { box-shadow: none; }
+    .clause p, .party .row, .summary tbody td, .audit .item .v { color: #000; }
+    .clause h5, .grand .value, .audit .item .v, .summary .total { color: #b8895a; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 700px) {
+    .parties { grid-template-columns: 1fr; }
+    .audit { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 28px; }
+    .grand { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo">PS</div>
+      <div>
+        <h1>Pauleanderson Souza</h1>
+        <small>Fotógrafo · Filmmaker</small>
+      </div>
+    </div>
+    <div class="doc-info">
+      <strong id="contrato-num">CONTRATO #—</strong>
+      <span>Emitido em <span id="emissao">—</span></span><br/>
+      <span>Vinculado ao orçamento <span id="orc-ref">—</span></span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Contrato de Prestação de Serviços</div>
+    <h2>Fotografia & Filmagem<br/>para Festa de 15 Anos</h2>
+    <p>Documento contratual entre CONTRATANTE e CONTRATADO, com aceite eletrônico registrado por IP e data/hora.</p>
+  </section>
+
+  <!-- LOADING / ERROR STATE -->
+  <div id="loading" class="state">
+    <div class="spinner"></div>
+    Carregando dados do contrato…
+  </div>
+  <div id="error" class="state err" style="display:none;">
+    <strong>⚠ Não foi possível carregar o contrato.</strong><br/>
+    <span id="error-msg">—</span>
+  </div>
+
+  <!-- CONTRACT CONTENT (rendered after data load) -->
+  <div id="contract" style="display:none;">
+
+    <!-- PARTIES -->
+    <div class="section">
+      <div class="section-title">
+        <span class="num">01</span>
+        <h3>Qualificação das Partes</h3>
+        <span class="line"></span>
+      </div>
+      <div class="parties">
+        <div class="party">
+          <div class="label">Contratante</div>
+          <h4 id="cli-nome">—</h4>
+          <div class="row"><strong>WhatsApp:</strong> <span id="cli-tel">—</span></div>
+          <div class="row"><strong>E-mail:</strong> <span id="cli-email">—</span></div>
+          <div class="row"><strong>Data evento:</strong> <span id="cli-data">—</span></div>
+          <div class="row"><strong>Local:</strong> <span id="cli-local">—</span></div>
+        </div>
+        <div class="party">
+          <div class="label">Contratado</div>
+          <h4>Pauleanderson Souza</h4>
+          <div class="row"><strong>Profissão:</strong> Fotógrafo · Filmmaker</div>
+          <div class="row"><strong>CPF:</strong> 000.000.000-00</div>
+          <div class="row"><strong>CNPJ:</strong> 20.805.712/0001-95</div>
+          <div class="row"><strong>E-mail:</strong> pauleandersongomes@gmail.com</div>
+          <div class="row"><strong>WhatsApp:</strong> (92) 99241-1099</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OBJETO -->
+    <div class="section">
+      <div class="section-title">
+        <span class="num">02</span>
+        <h3>Objeto do Contrato</h3>
+        <span class="line"></span>
+      </div>
+      <div class="clause">
+        <h5>Cláusula 1ª — Do objeto</h5>
+        <p>O CONTRATADO se obriga a prestar ao CONTRATANTE serviços de <strong>cobertura fotográfica e/ou filmagem</strong> para a festa de 15 anos da debutante, conforme pacote contratado e add-ons descritos na Cláusula 2ª, a ser realizada em <strong id="obj-data">—</strong>, no local <strong id="obj-local">—</strong>, com início nos termos combinados entre as partes.</p>
+      </div>
+    </div>
+
+    <!-- RESUMO FINANCEIRO -->
+    <div class="section">
+      <div class="section-title">
+        <span class="num">03</span>
+        <h3>Resumo Financeiro</h3>
+        <span class="line"></span>
+      </div>
+
+      <table class="summary">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th style="text-align:right;">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sessão</strong></td>
+            <td id="sum-sessao">—</td>
+            <td class="total" style="text-align:right;" id="sum-sessao-valor">—</td>
+          </tr>
+          <tr id="row-extras" style="display:none;">
+            <td><strong>Extras</strong></td>
+            <td id="sum-extras">—</td>
+            <td class="total" style="text-align:right;" id="sum-extras-valor">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grand">
+        <div>
+          <div class="label">Total do contrato</div>
+          <small style="color:var(--muted); font-size:11px; letter-spacing:1px; text-transform:uppercase;">Sessão + extras</small>
+        </div>
+        <div class="value" id="sum-total">R$ 0,00</div>
+      </div>
+    </div>
+
+    <!-- CLÁUSULAS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="num">04</span>
+        <h3>Cláusulas Contratuais</h3>
+        <span class="line"></span>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 2ª — Do pacote e add-ons</h5>
+        <p>O CONTRATANTE contrata o pacote <strong id="cl-sessao">—</strong>, acrescido dos add-ons <strong id="cl-extras">—</strong>, conforme descrito no orçamento referenciado neste contrato.</p>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 3ª — Da forma de pagamento</h5>
+        <p>O pagamento será realizado da seguinte forma: <strong>sinal de 30%</strong> na aprovação do orçamento, e o restante parcelado em <strong>até 3 vezes</strong>, com vencimento da última parcela na data do evento.</p>
+        <div class="obs">Dados para pagamento (Pix/transferência) serão informados pelo CONTRATADO ao CONTRATANTE em canal particular.</div>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 4ª — Dos prazos de entrega</h5>
+        <p>As fotos editadas em alta resolução serão entregues em até <strong>15 dias úteis</strong> após o evento. Vídeos (Reels e vídeo resumo) serão entregues no mesmo prazo, salvo contratação de <em>Same Day Edit</em>, que prevê entrega durante a festa.</p>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 5ª — Do cancelamento e reembolso</h5>
+        <p>Em caso de cancelamento pelo CONTRATANTE com até <strong>30 dias de antecedência</strong> da data do evento, será reembolsado <strong>50% do valor do sinal</strong>. Após esse prazo, não haverá reembolso. Cancelamento por caso fortuito ou força maior será analisado individualmente.</p>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 6ª — Dos direitos de uso de imagem</h5>
+        <p>Os direitos de uso pessoal e familiar das imagens estão <strong>inclusos</strong> ao CONTRATANTE. O CONTRATADO poderá utilizar as imagens em portfólio, redes sociais e materiais de divulgação, salvo manifestação expressa em contrário. Uso comercial ou publicitário das imagens pelo CONTRATANTE depende de negociação prévia.</p>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 7ª — Das revisões</h5>
+        <p>Estão inclusas até <strong>2 rodadas de revisão</strong> para os vídeos finais. Revisões adicionais serão cobradas à parte, no valor de <strong>R$ 120,00/hora</strong> técnica de edição.</p>
+      </div>
+
+      <div class="clause">
+        <h5>Cláusula 8ª — Do foro</h5>
+        <p>Fica eleito o foro da comarca do CONTRATADO para dirimir quaisquer questões oriundas do presente contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+      </div>
+    </div>
+
+    <!-- ACEITE -->
+    <div class="section" id="aprovacao">
+      <div class="section-title">
+        <span class="num">05</span>
+        <h3>Aceite Eletrônico</h3>
+        <span class="line"></span>
+      </div>
+
+      <div class="aceite" id="aceite-box">
+        <h3>Confirme sua aprovação</h3>
+        <p class="sub">Ao marcar o checkbox e confirmar, você declara estar de acordo com todas as cláusulas deste contrato. Um registro eletrônico (IP + data/hora) será gerado e ambos os contratantes receberão uma cópia por e-mail.</p>
+
+        <div class="check-row">
+          <input type="checkbox" id="aceite-check" />
+          <label for="aceite-check">Li, compreendi e aceito todos os termos deste contrato, em nome do CONTRATANTE.</label>
+        </div>
+
+        <div class="audit">
+          <div class="item">
+            <div class="k">Assinante</div>
+            <div class="v" id="audit-nome">—</div>
+          </div>
+          <div class="item">
+            <div class="k">IP</div>
+            <div class="v" id="audit-ip">aguardando…</div>
+          </div>
+          <div class="item">
+            <div class="k">Data / hora</div>
+            <div class="v" id="audit-data">—</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-confirmar">✓ Confirmar aceite</button>
+          <a class="btn btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">💬 Enviar por WhatsApp</a>
+          <span id="aceite-status" class="status"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="sign">Pauleanderson Souza</div>
+    Fotógrafo · Filmmaker<br/>
+    CNPJ 20.805.712/0001-95<br/>
+    contato: pauleandersongomes@gmail.com · (92) 99241-1099
+  </footer>
+
+</div>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+(function(){
+  // ============================================================
+  // ⚙️ CONFIGURAÇÃO
+  // ============================================================
+  const SUPABASE_URL  = 'https://phwbljrusnrvhrdrxqso.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_1pdPvUW4F_QJKoUYb_A_5g_F5COoc5A';
+
+  // EmailJS — preencher após criar conta em https://www.emailjs.com/
+  // (ver instruções no plano)
+  const EMAILJS_PUBLIC_KEY = '4Gr-vqZr_d5G0DW1F';
+  const EMAILJS_SERVICE_ID = 'service_7bmm2yc';
+  const EMAILJS_TEMPLATE_ID = 'template_Contrato';
+  // ============================================================
+
+  // Email do fotógrafo (destinatário da cópia)
+  const PHOTOGRAPHER_EMAIL = 'pauleandersongomes@gmail.com';
+
+  const $  = (q, p=document) => p.querySelector(q);
+  const $$ = (q, p=document) => Array.from(p.querySelectorAll(q));
+
+  const sb = (SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('SEU-PROJETO'))
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+    : null;
+
+  // ---- helpers ----
+  function fmtBRL(v){
+    return 'R$ ' + (Number(v) || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function fmtDate(iso){
+    if(!iso) return '—';
+    const [y,m,d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+  function fmtDateTimeBR(d){
+    const pad = n => String(n).padStart(2,'0');
+    return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+  function escapeHtml(s){
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  // ---- read URL param ----
+  const id = new URLSearchParams(location.search).get('id');
+  if(!id){
+    showError('Link inválido. Volte ao orçamento e clique em "Ir para o contrato".');
+    return;
+  }
+
+  // ---- EmailJS init ----
+  if(EMAILJS_PUBLIC_KEY && window.emailjs){
+    try { window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+    catch(e){ console.warn('EmailJS init falhou:', e); }
+  }
+
+  // ---- fetch IP ----
+  async function fetchIP(){
+    try{
+      const r = await fetch('https://api.ipify.org?format=json');
+      const j = await r.json();
+      return j.ip || '—';
+    }catch(e){
+      return 'indisponível';
+    }
+  }
+
+  // ---- main load ----
+  let registro = null;
+  let ipAtual = '—';
+
+  async function load(){
+    if(!sb){ showError('Supabase não configurado.'); return; }
+    const { data, error } = await sb.from('clientes').select('*').eq('id', id).single();
+    if(error || !data){ showError('Registro não encontrado (id='+id+').'); return; }
+    registro = data;
+
+    // IP em paralelo (não bloqueia render)
+    fetchIP().then(ip => {
+      ipAtual = ip;
+      $('#audit-ip').textContent = ip;
+    });
+
+    render();
+  }
+
+  function showError(msg){
+    $('#loading').style.display = 'none';
+    $('#error').style.display = 'block';
+    $('#error-msg').textContent = msg;
+  }
+
+  function render(){
+    const r = registro;
+    const contratoNum = `${r.orcamento || '2026-049'}-${String(r.id).padStart(3,'0')}`;
+    $('#contrato-num').textContent = `CONTRATO #${contratoNum}`;
+    $('#orc-ref').textContent = r.orcamento || '—';
+    $('#emissao').textContent = fmtDateTimeBR(new Date());
+
+    // parties
+    $('#cli-nome').textContent = r.nome || '—';
+    $('#cli-tel').textContent = r.tel || '—';
+    $('#cli-email').textContent = r.email || '—';
+    $('#cli-data').textContent = fmtDate(r.data_evento);
+    $('#cli-local').textContent = r.local || '—';
+    $('#obj-data').textContent = fmtDate(r.data_evento);
+    $('#obj-local').textContent = r.local || '—';
+
+    // summary
+    const sessaoValor = Number(r.sessao_valor) || 0;
+    const extrasValor = Number(r.extras_valor) || 0;
+    const total = Number(r.total) || (sessaoValor + extrasValor);
+    $('#sum-sessao').textContent = r.sessao || '—';
+    $('#sum-sessao-valor').textContent = fmtBRL(sessaoValor);
+    if(r.extras_nomes){
+      $('#row-extras').style.display = '';
+      $('#sum-extras').textContent = r.extras_nomes;
+      $('#sum-extras-valor').textContent = fmtBRL(extrasValor);
+    }
+    $('#sum-total').textContent = fmtBRL(total);
+
+    // clauses
+    $('#cl-sessao').textContent = r.sessao || '—';
+    $('#cl-extras').textContent = r.extras_nomes || 'nenhum';
+
+    // audit (assinante sempre vem do registro; IP/data são do aceite)
+    $('#audit-nome').textContent = r.nome || '—';
+    $('#audit-data').textContent = fmtDateTimeBR(new Date());
+
+    // WhatsApp link
+    const waMsg = encodeURIComponent(
+      `Olá Paulo! Acabei de aceitar eletronicamente o contrato ${contratoNum} referente ao orçamento ${r.orcamento}.`
+    );
+    $('#btn-wa').href = `https://wa.me/5592992411099?text=${waMsg}`;
+
+    // se já estiver aprovado, mostra o box como done
+    if((r.status || '').toLowerCase() === 'aprovado'){
+      $('#aceite-box').classList.add('done');
+      $('#aceite-status').textContent = '✓ Contrato já aceito em ' + (r.aceite_em ? fmtDateTimeBR(new Date(r.aceite_em)) : 'data anterior');
+      $('#aceite-status').className = 'status ok';
+      $('#btn-confirmar').disabled = true;
+      $('#btn-confirmar').textContent = '✓ Já aceito';
+      $('#aceite-check').checked = true;
+      $('#aceite-check').disabled = true;
+      if(r.aceite_ip) $('#audit-ip').textContent = r.aceite_ip;
+      if(r.aceite_em) $('#audit-data').textContent = fmtDateTimeBR(new Date(r.aceite_em));
+    }
+
+    // show
+    $('#loading').style.display = 'none';
+    $('#contract').style.display = 'block';
+  }
+
+  // ---- confirmar aceite ----
+  $('#btn-confirmar').addEventListener('click', async function(){
+    if(!registro) return;
+    if(!$('#aceite-check').checked){
+      $('#aceite-status').textContent = 'Marque o checkbox de aceite primeiro.';
+      $('#aceite-status').className = 'status err';
+      return;
+    }
+
+    const btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Salvando…';
+    $('#aceite-status').textContent = 'Registrando aceite eletrônico…';
+    $('#aceite-status').className = 'status';
+
+    const contratoNum = `${registro.orcamento || '2026-049'}-${String(registro.id).padStart(3,'0')}`;
+    const aceiteEm = new Date().toISOString();
+
+    try{
+      if(!sb) throw new Error('Supabase não configurado.');
+
+      const { error } = await sb.from('clientes').update({
+        status: 'aprovado',
+        aceite_em: aceiteEm,
+        aceite_ip: ipAtual,
+        contrato_numero: contratoNum
+      }).eq('id', registro.id);
+      if(error) throw error;
+
+      // atualiza local
+      registro.status = 'aprovado';
+      registro.aceite_em = aceiteEm;
+      registro.aceite_ip = ipAtual;
+      registro.contrato_numero = contratoNum;
+
+      $('#audit-data').textContent = fmtDateTimeBR(new Date(aceiteEm));
+      $('#aceite-box').classList.add('done');
+      btn.textContent = '✓ Aceito!';
+      btn.disabled = true;
+      $('#aceite-check').disabled = true;
+
+      // dispara emails
+      $('#aceite-status').textContent = 'Enviando cópias por e-mail…';
+      try{
+        await enviarEmails(registro, contratoNum);
+        $('#aceite-status').textContent = '✓ Aprovação registrada! Cópias enviadas por e-mail.';
+        $('#aceite-status').className = 'status ok';
+      }catch(eEmail){
+        console.warn('Email falhou:', eEmail);
+        $('#aceite-status').textContent = '✓ Aprovação registrada! (e-mail falhou — confira o console)';
+        $('#aceite-status').className = 'status err';
+      }
+
+    }catch(e){
+      console.error(e);
+      btn.disabled = false;
+      btn.textContent = '✓ Confirmar aceite';
+      $('#aceite-status').textContent = 'Erro: ' + (e.message || e);
+      $('#aceite-status').className = 'status err';
+    }
+  });
+
+  // ---- EmailJS ----
+  async function enviarEmails(reg, contratoNum){
+    if(!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID){
+      throw new Error('EmailJS não configurado. Preencha as 3 constantes.');
+    }
+    if(!window.emailjs) throw new Error('SDK EmailJS não carregou.');
+
+    const baseParams = {
+      cliente_nome: reg.nome,
+      contrato_numero: contratoNum,
+      orcamento_ref: reg.orcamento,
+      sessao: reg.sessao,
+      extras: reg.extras_nomes || 'nenhum',
+      total: fmtBRL(reg.total),
+      data_evento: fmtDate(reg.data_evento),
+      local: reg.local,
+      aceite_ip: reg.aceite_ip || ipAtual,
+      aceite_data: fmtDateTimeBR(new Date(reg.aceite_em))
+    };
+
+    let clienteEnviado = false;
+
+    // envio 1: cliente (se tiver email válido)
+    if(reg.email && reg.email.includes('@')){
+      await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        ...baseParams,
+        to_email: reg.email
+      });
+      clienteEnviado = true;
+    }
+
+    // envio 2: fotógrafo sempre recebe cópia
+    await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      ...baseParams,
+      to_email: PHOTOGRAPHER_EMAIL
+    });
+
+    return { clienteEnviado };
+  }
+
+  // ---- start ----
+  load();
+
+})();
+</script>
+</body>
+</html>

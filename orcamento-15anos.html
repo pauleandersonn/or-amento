@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orçamento · Fotografia & Filmagem — Festa 15 Anos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f10;
+    --bg-2: #151517;
+    --card: #1c1c1f;
+    --line: #2a2a2e;
+    --text: #f2f2f2;
+    --muted: #a0a0a6;
+    --accent: #d4a574;
+    --accent-2: #b8895a;
+    --wa: #25d366;
+    --wa-2: #1ebe5b;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand .logo {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+  }
+  .brand h1 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .brand small {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .doc-info {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .doc-info strong { color: var(--text); display: block; font-size: 13px; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 20px 0 40px;
+  }
+  .hero .eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .hero h2 {
+    font-family: 'Georgia', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+
+  /* ---------- CLIENT BLOCK ---------- */
+  .client {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 36px;
+  }
+  .client .field label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .client .field .value {
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 4px;
+    min-height: 20px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-title h3 {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    font-weight: 400;
+  }
+  .section-title .num {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .section-title .line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ---------- ITEMS TABLE ---------- */
+  .items {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .items thead th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 14px 16px;
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .items tbody td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .items tbody tr:last-child td { border-bottom: none; }
+  .items .desc strong { display: block; font-weight: 500; }
+  .items .desc span { font-size: 12px; color: var(--muted); }
+  .items .qty, .items .unit, .items .total { text-align: right; white-space: nowrap; }
+  .items .total { color: var(--accent); font-weight: 500; }
+
+  /* ---------- TOTALS ---------- */
+  .totals {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .totals table {
+    width: 320px;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .totals td {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .totals td:last-child { text-align: right; }
+  .totals tr.grand td {
+    border-bottom: none;
+    border-top: 1px solid var(--accent);
+    padding-top: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'Georgia', serif;
+  }
+
+  /* ---------- PACKAGES ---------- */
+  .packages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .pkg {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px 20px;
+    position: relative;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .pkg:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .pkg.featured { border-color: var(--accent); }
+  .pkg.featured::before {
+    content: "MAIS PEDIDO";
+    position: absolute;
+    top: -10px; right: 16px;
+    background: var(--accent);
+    color: #1a1a1a;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .pkg h4 {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .pkg .price {
+    font-size: 22px;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 12px 0 16px;
+  }
+  .pkg .price small {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .pkg ul { list-style: none; }
+  .pkg ul li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+    padding-left: 18px;
+  }
+  .pkg ul li::before {
+    content: "✓";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .pkg ul li:last-child { border-bottom: none; }
+
+  /* ---------- TIMELINE / ETAPAS ---------- */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .stage {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .stage .hour {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .stage h5 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .stage p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ---------- NOTES ---------- */
+  .notes {
+    background: var(--bg-2);
+    border-left: 3px solid var(--accent);
+    padding: 18px 22px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .notes strong { color: var(--text); display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .notes ul { padding-left: 18px; margin-top: 6px; }
+  .notes ul li { margin-bottom: 4px; }
+
+  /* ---------- CTA ---------- */
+  .cta-wrap {
+    text-align: center;
+    margin: 50px 0 30px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--wa);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 34px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, .25);
+    transition: background .2s ease, transform .2s ease;
+  }
+  .cta:hover { background: var(--wa-2); transform: translateY(-2px); }
+  .cta svg { width: 22px; height: 22px; fill: #fff; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer .sign {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  /* ---------- EXTRAS CARDS (selecionáveis) ---------- */
+  .extras-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .extra-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px 18px 50px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .extra-card:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+  .extra-card input[type="checkbox"] {
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 18px; height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .extra-card.selected {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(212,165,116,.08), transparent);
+  }
+  .extra-card .extra-name {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .extra-card .extra-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .extra-card .extra-price {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 600;
+    font-family: 'Georgia', serif;
+  }
+  .extras-total {
+    margin-top: 18px;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  .extras-total strong {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  .grand-total {
+    margin-top: 24px;
+    padding: 22px 24px;
+    background: linear-gradient(135deg, rgba(212,165,116,.12), rgba(212,165,116,.04));
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .grand-total .label {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+  }
+  .grand-total .value {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  @media (max-width: 700px) {
+    .extras-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- ADMIN HINT ---------- */
+  .admin-hint {
+    text-align: center;
+    margin: 30px 0 10px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .admin-hint a {
+    color: var(--muted);
+    text-decoration: underline dotted;
+    cursor: pointer;
+  }
+  .admin-only { display: none; }
+  .admin-only.show { display: block; }
+
+  /* ---------- EXTRAS DESTAQUE ---------- */
+  .extras-title h3 {
+    font-size: 26px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .extras-title .num {
+    background: var(--accent);
+    color: #1a1a1a;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .extras-strong {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .extras-desc {
+    display: block;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .items tbody tr td {
+    padding: 18px 16px;
+  }
+
+  /* ---------- FORMULÁRIO DE APROVAÇÃO ---------- */
+  .approval {
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 32px 28px;
+    margin-top: 10px;
+    box-shadow: 0 12px 32px rgba(212, 165, 116, .08);
+  }
+  .approval h3 {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .approval .sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+  }
+  .form-grid .full { grid-column: 1 / -1; }
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+  .field label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #1a1a1c;
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .field .hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+    align-items: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--text);
+    transition: all .2s ease;
+    text-decoration: none;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-primary {
+    background: var(--accent);
+    color: #1a1a1a;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+  .btn-wa { background: var(--wa); border-color: var(--wa); color: #fff; }
+  .btn-wa:hover { background: var(--wa-2); border-color: var(--wa-2); color: #fff; }
+  .form-status {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .form-status.ok { color: #5fc88a; }
+  .form-status.err { color: #e07b6c; }
+
+  /* ---------- CRM PAINEL ---------- */
+  .crm {
+    margin-top: 40px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg-2);
+    overflow: hidden;
+  }
+  .crm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+  }
+  .crm-header h3 {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  .crm-header small {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .crm-actions { display: flex; gap: 8px; }
+  .crm-actions .btn { padding: 8px 14px; font-size: 11px; }
+  .crm-list {
+    max-height: 360px;
+    overflow-y: auto;
+  }
+  .crm-list table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .crm-list thead th {
+    position: sticky; top: 0;
+    background: var(--bg-2);
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .crm-list tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .crm-list tbody tr:hover { background: rgba(212, 165, 116, .05); }
+  .crm-list .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .tag-novo   { background: #2a3a4a; color: #6fb6ff; }
+  .tag-aprov  { background: #2a4a35; color: #5fc88a; }
+  .tag-pend   { background: #4a3a2a; color: #e0a96b; }
+  .tag-recus  { background: #4a2a2a; color: #e07b6c; }
+  .crm-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .row-del {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: color .2s, background .2s;
+  }
+  .row-del:hover { color: #e07b6c; background: rgba(224, 123, 108, .1); }
+
+  @media (max-width: 700px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .crm-list table { font-size: 12px; }
+    .crm-list thead { display: none; }
+    .crm-list tbody td { display: block; padding: 6px 16px; border: none; }
+    .crm-list tbody tr { display: block; border-bottom: 1px solid var(--line); padding: 12px 0; }
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    body { background: #fff; color: #000; }
+    .page { padding: 20px; max-width: 100%; }
+    .cta-wrap, .crm, .form-actions, .btn, .admin-hint, .admin-only { display: none !important; }
+    .items, .pkg, .stage, .client, .notes, .approval { background: #fff; border-color: #ddd; color: #000; }
+    .items tbody td, .items thead th { border-color: #ddd; }
+    .items .desc span, .pkg ul li, .stage p, .notes, footer, .field label { color: #444; }
+    .field input, .field select, .field textarea {
+      background: #fff; color: #000; border-color: #ccc;
+    }
+    .pkg.featured { border: 2px solid #b8895a; }
+    .approval { box-shadow: none; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 700px) {
+    .client { grid-template-columns: 1fr; }
+    .packages { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .hero h2 { font-size: 28px; }
+    .items thead { display: none; }
+    .items tbody td { display: block; text-align: left; padding: 6px 16px; border: none; }
+    .items tbody tr { display: block; border-bottom: 1px solid var(--line); padding: 12px 0; }
+    .items .qty, .items .unit, .items .total { text-align: left; }
+    .items .total::before { content: "Subtotal: "; color: var(--muted); font-weight: 400; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo">PS</div>
+      <div>
+        <h1>Pauleanderson Souza</h1>
+        <small>Fotógrafo · Filmmaker</small>
+      </div>
+    </div>
+    <div class="doc-info">
+      <strong>ORÇAMENTO #2026-049</strong>
+      <span>Data: 24/06/2026</span><br/>
+      <span>Validade: 15 dias</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Proposta Comercial · Debutante</div>
+    <h2>Fotografia & Filmagem<br/>para Festa de 15 Anos</h2>
+    <p>Cobertura completa do Making-of ao baile, com edição cinematográfica, ensaio pré-festa e entrega otimizada para Reels, TikTok e lembranças impressas.</p>
+  </section>
+
+  <!-- CLIENT -->
+  <section class="client">
+    <div class="field">
+      <label>Cliente / Família</label>
+      <div class="value">Jean</div>
+    </div>
+    <div class="field">
+      <label>Data da festa</label>
+      <div class="value">11/07</div>
+    </div>
+    <div class="field">
+      <label>Local / Salão</label>
+      <div class="value">Espaço Decker</div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">01</span>
+      <h3>Sessões</h3>
+      <span class="line"></span>
+    </div>
+
+    <div class="packages">
+      <div class="pkg featured">
+        <h4>Combo</h4>
+        <div class="price">R$ 2.497<small>foto + filmagem</small></div>
+        <ul>
+          <li>Cobertura completa do evento</li>
+          <li>1 fotógrafo + 1 cinegrafista</li>
+          <li>250 fotos editadas em alta resolução</li>
+          <li>3 Reels verticais (até 60s)</li>
+          <li>Making-of com bastidores</li>
+          <li>Color grade cinematográfica</li>
+          <li>Slideshow projetado na festa</li>
+          <li>Galeria online para convidados</li>
+          <li>Entrega em 15 dias úteis</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <h4>Apenas Fotografia</h4>
+        <div class="price">R$ 1.497<small>fotos profissionais</small></div>
+        <ul>
+          <li>4h de cobertura (cerimônia + baile)</li>
+          <li>1 fotógrafo</li>
+          <li>150 fotos editadas em alta resolução</li>
+          <li>Versões otimizadas para redes sociais</li>
+          <li>Galeria online para convidados</li>
+          <li>Entrega em 10 dias úteis</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <h4>Apenas Filmagem</h4>
+        <div class="price">R$ 1.797<small>vídeo cinematográfico</small></div>
+        <ul>
+          <li>Cobertura completa em 4K</li>
+          <li>1 cinegrafista + gimbal</li>
+          <li>3 Reels verticais (até 60s)</li>
+          <li>1 vídeo resumo (2–3min) horizontal</li>
+          <li>Making-of com bastidores</li>
+          <li>Color grade cinematográfica</li>
+          <li>Entrega em 15 dias úteis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE / ETAPAS -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">02</span>
+      <h3>Como funciona o dia</h3>
+      <span class="line"></span>
+    </div>
+
+    <div class="timeline">
+      <div class="stage">
+        <div class="hour">FASE 01</div>
+        <h5>Making-of</h5>
+        <p>Preparação, dress up e detalhes da debutante</p>
+      </div>
+      <div class="stage">
+        <div class="hour">FASE 02</div>
+        <h5>Cerimônia</h5>
+        <p>Missa, entrada triunfal e valsas</p>
+      </div>
+      <div class="stage">
+        <div class="hour">FASE 03</div>
+        <h5>Baile & Festa</h5>
+        <p>Brindes, pista de dança e interações</p>
+      </div>
+      <div class="stage">
+        <div class="hour">FASE 04</div>
+        <h5>Pós-produção</h5>
+        <p>Edição, color grade e entrega digital</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- (Seção "Detalhamento" removida conforme solicitação) -->
+
+  <!-- ADD-ONS -->
+  <div class="section">
+    <div class="section-title extras-title">
+      <span class="num">03</span>
+      <h3>Material Extra · Opcional</h3>
+      <span class="line"></span>
+    </div>
+
+    <div class="extras-cards">
+      <label class="extra-card" data-price="650">
+        <input type="checkbox" name="extra_drone" value="Drone Aéreo" data-price="650" />
+        <div class="extra-name">Drone Aéreo</div>
+        <div class="extra-desc">Cenas externas em 4K, ideal para entrada triunfal, cenário do Espaço Decker e vista panorâmica do salão.</div>
+        <div class="extra-price">+ R$ 650,00</div>
+      </label>
+
+      <label class="extra-card" data-price="890">
+        <input type="checkbox" name="extra_album" value="Livro Álbum Premium 30x30" data-price="890" />
+        <div class="extra-name">Livro Álbum Premium 30×30</div>
+        <div class="extra-desc">Capa dura, 30 páginas, laminação fosca. A lembrança física definitiva em acabamento fotográfico profissional.</div>
+        <div class="extra-price">+ R$ 890,00</div>
+      </label>
+
+      <label class="extra-card" data-price="220">
+        <input type="checkbox" name="extra_pen" value="Pen Drive Personalizado em Madeira" data-price="220" />
+        <div class="extra-name">Pen Drive em Madeira</div>
+        <div class="extra-desc">Caixa personalizada com nome da debutante e fotos da capa. Todas as fotos e vídeos em alta resolução.</div>
+        <div class="extra-price">+ R$ 220,00</div>
+      </label>
+
+      <label class="extra-card" data-price="750">
+        <input type="checkbox" name="extra_sde" value="Same Day Edit" data-price="750" />
+        <div class="extra-name">Same Day Edit</div>
+        <div class="extra-desc">Edição rápida de até 2min, montada e exibida durante a festa como surpresa na pista de dança.</div>
+        <div class="extra-price">+ R$ 750,00</div>
+      </label>
+
+      <label class="extra-card" data-price="550">
+        <input type="checkbox" name="extra_ensaio" value="Ensaio Pré-Festa 2h" data-price="550" />
+        <div class="extra-name">Ensaio Pré-Festa · 2h</div>
+        <div class="extra-desc">Sessão externa com direção de poses e styling. Material usado no making-of e no slideshow projetado.</div>
+        <div class="extra-price">+ R$ 550,00</div>
+      </label>
+
+      <label class="extra-card" data-price="380">
+        <input type="checkbox" name="extra_segundo" value="Segundo Cinegrafista" data-price="380" />
+        <div class="extra-name">Segundo Cinegrafista</div>
+        <div class="extra-desc">Mais um profissional de vídeo em tempo integral — cobre a festa toda com mais ângulos, sem perder nenhum momento.</div>
+        <div class="extra-price">+ R$ 380,00</div>
+      </label>
+    </div>
+
+    <div class="extras-total">
+      <span>Subtotal dos extras selecionados</span>
+      <strong id="extras-total">R$ 0,00</strong>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">04</span>
+      <h3>Condições</h3>
+      <span class="line"></span>
+    </div>
+    <div class="notes">
+      <strong>Observações importantes</strong>
+      <ul>
+        <li>Sinal de 30% na aprovação · restante parcelado em até 3x até a data do evento.</li>
+        <li>Cancelamento até 30 dias antes: reembolso de 50% do sinal.</li>
+        <li>Fotos em alta resolução + versões otimizadas para WhatsApp e Instagram.</li>
+        <li>Direitos de uso pessoal e familiar inclusos. Uso comercial sob negociação.</li>
+        <li>Até 2 rodadas de revisão de vídeos · adicionais: R$ 120/hora.</li>
+        <li>Reserva de data somente após confirmação do sinal e contrato assinado.</li>
+        <li>Orçamento válido por 15 dias a partir da data de emissão.</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- CTA WHATSAPP -->
+  <div class="cta-wrap">
+    <a class="cta" id="cta-wa-link" href="https://wa.me/?text=Olá%20Paulo!%20Recebi%20o%20or%C3%A7amento%20para%20festa%20de%2015%20anos%20e%20gostaria%20de%20aprovar." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+      </svg>
+      Aprovar orçamento pelo WhatsApp
+    </a>
+  </div>
+
+  <!-- FORMULÁRIO DE APROVAÇÃO -->
+  <div class="section" id="aprovacao">
+    <div class="section-title">
+      <span class="num">05</span>
+      <h3>Cadastro & Aprovação</h3>
+      <span class="line"></span>
+    </div>
+
+    <div class="approval">
+      <h3>Preencha seus dados para aprovar</h3>
+      <p class="sub">Ao enviar, Paulo Anderson recebe sua aprovação no painel dele. Você recebe um e-mail de confirmação.</p>
+
+      <form id="approval-form" class="form-grid" autocomplete="on">
+        <div class="field">
+          <label for="f-nome">Nome completo *</label>
+          <input id="f-nome" name="nome" type="text" placeholder="Ex.: Jean Silva" required />
+        </div>
+        <div class="field">
+          <label for="f-tel">WhatsApp *</label>
+          <input id="f-tel" name="tel" type="tel" placeholder="(21) 99999-9999" required />
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" placeholder="seuemail@exemplo.com" />
+        </div>
+        <div class="field">
+          <label for="f-data">Data da festa</label>
+          <input id="f-data" name="data" type="date" value="2026-07-11" />
+        </div>
+        <div class="field">
+          <label for="f-local">Local / Salão</label>
+          <input id="f-local" name="local" type="text" placeholder="Ex.: Espaço Decker" />
+        </div>
+        <div class="field">
+          <label for="f-sessao">Sessão escolhida *</label>
+          <select id="f-sessao" name="sessao" required>
+            <option value="">— Selecione —</option>
+            <option value="Combo|2497">Combo (Foto + Filmagem) — R$ 2.497</option>
+            <option value="Apenas Fotografia|1497">Apenas Fotografia — R$ 1.497</option>
+            <option value="Apenas Filmagem|1797">Apenas Filmagem — R$ 1.797</option>
+          </select>
+        </div>
+        <input type="hidden" id="f-extras-nomes" name="extras_nomes" value="" />
+        <input type="hidden" id="f-extras-valor" name="extras_valor" value="0" />
+        <input type="hidden" id="f-total" name="total" value="0" />
+        <div class="field full">
+          <label for="f-obs">Observações</label>
+          <textarea id="f-obs" name="obs" placeholder="Alguma informação adicional sobre o evento…"></textarea>
+        </div>
+
+        <div class="grand-total full" style="grid-column: 1 / -1;">
+          <div>
+            <div class="label">Total</div>
+            <small style="color:var(--muted); font-size:11px; letter-spacing:1px; text-transform:uppercase;">Sessão + extras</small>
+          </div>
+          <div class="value" id="grand-total">R$ 0,00</div>
+        </div>
+
+        <div class="form-actions full" style="grid-column: 1 / -1;">
+          <button type="submit" class="btn btn-primary">✉ Enviar aprovação para Paulo Anderson</button>
+          <a id="btn-go-contract" class="btn" href="#" target="_self" style="display:none;">📄 Ir para o contrato →</a>
+          <span id="form-status" class="form-status"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LINK DISCRETO PARA ADMIN -->
+  <p class="admin-hint">
+    Paulo Anderson? <a id="admin-toggle">Acessar painel administrativo</a>
+  </p>
+
+  <!-- MINI-CRM (admin only) -->
+  <div class="admin-only" id="crm-section">
+    <div class="section" style="margin-top:0;">
+      <div class="section-title">
+        <span class="num">A</span>
+        <h3>Painel Administrativo</h3>
+        <span class="line"></span>
+      </div>
+      <div class="crm">
+        <div class="crm-header">
+          <div>
+            <h3>Clientes cadastrados</h3>
+            <small>Conectado ao Supabase · leitura em tempo real</small>
+          </div>
+          <div class="crm-actions">
+            <button class="btn" id="btn-refresh">↻ Atualizar</button>
+            <button class="btn" id="btn-export">⬇ Exportar JSON</button>
+            <button class="btn" id="btn-clear">Limpar tudo</button>
+          </div>
+        </div>
+        <div class="crm-list" id="crm-list">
+          <div class="crm-empty">Carregando…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="sign">Pauleaanderson Souza</div>
+    Fotógrafo · Filmmaker<br/>
+    CNPJ 20.805.712/0001-95<br/>
+    contato: pauleandersongomes@gmail.com · (92) 99241-1099
+  </new_string>
+
+</div>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(function(){
+  // ============================================================
+  // ⚙️ CONFIGURAÇÃO — preencha com seus dados do Supabase
+  // ============================================================
+  const SUPABASE_URL  = 'https://phwbljrusnrvhrdrxqso.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_1pdPvUW4F_QJKoUYb_A_5g_F5COoc5A';
+  // ============================================================
+  // Tabela esperada no Supabase:
+  // create table public.clientes (
+  //   id bigserial primary key,
+  //   created_at timestamp with time zone default now(),
+  //   nome text, tel text, email text,
+  //   data_evento date, local text,
+  //   sessao text, sessao_valor numeric,
+  //   extras_nomes text, extras_valor numeric,
+  //   total numeric,
+  //   obs text, status text default 'novo',
+  //   orcamento text
+  // );
+  // E habilite RLS com policy de INSERT aberto e SELECT autenticado.
+  // ============================================================
+
+  const $  = (q, p=document) => p.querySelector(q);
+  const $$ = (q, p=document) => Array.from(p.querySelectorAll(q));
+
+  const sb = (SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('SEU-PROJETO'))
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+    : null;
+
+  // ---- helpers ----
+  function fmtBRL(v){
+    return 'R$ ' + (Number(v) || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function fmtDate(iso){
+    if(!iso) return '—';
+    const [y,m,d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+  function fmtTs(iso){
+    const d = new Date(iso);
+    if(isNaN(d)) return '—';
+    const pad = n => String(n).padStart(2,'0');
+    return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+  function escapeHtml(s){
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  // ---- cálculo de extras + total ----
+  const SESSAO_PRICE = { 'Combo': 2497, 'Apenas Fotografia': 1497, 'Apenas Filmagem': 1797 };
+
+  function recalc(){
+    let extrasTotal = 0;
+    const extrasNomes = [];
+    $$('.extra-card input[type="checkbox"]').forEach(cb => {
+      const card = cb.closest('.extra-card');
+      if(cb.checked){
+        card.classList.add('selected');
+        extrasTotal += Number(cb.dataset.price) || 0;
+        extrasNomes.push(cb.value);
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+    $('#extras-total').textContent = fmtBRL(extrasTotal);
+
+    const sessaoSel = $('#f-sessao').value;
+    const sessaoNome = sessaoSel ? sessaoSel.split('|')[0] : '';
+    const sessaoValor = SESSAO_PRICE[sessaoNome] || 0;
+
+    const total = sessaoValor + extrasTotal;
+    $('#grand-total').textContent = fmtBRL(total);
+    $('#f-extras-nomes').value = extrasNomes.join(', ');
+    $('#f-extras-valor').value = extrasTotal.toFixed(2);
+    $('#f-total').value = total.toFixed(2);
+  }
+
+  $$('.extra-card').forEach(card => {
+    card.addEventListener('click', e => setTimeout(recalc, 0));
+  });
+  $('#f-sessao').addEventListener('change', recalc);
+  recalc();
+
+  // ---- admin toggle ----
+  $('#admin-toggle').addEventListener('click', e => {
+    e.preventDefault();
+    $('#crm-section').classList.toggle('show');
+    if($('#crm-section').classList.contains('show')) loadCRM();
+  });
+
+  function setStatus(msg, cls=''){
+    const el = $('#form-status');
+    el.textContent = msg;
+    el.className = 'form-status ' + cls;
+  }
+
+  // ---- form submit → Supabase ----
+  $('#approval-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const f = e.target;
+    const fd = new FormData(f);
+
+    const sessaoRaw = (fd.get('sessao') || '').toString();
+    const [sessaoNome, sessaoValorStr] = sessaoRaw.split('|');
+
+    const payload = {
+      nome:         (fd.get('nome')  || '').toString().trim(),
+      tel:          (fd.get('tel')   || '').toString().trim(),
+      email:        (fd.get('email') || '').toString().trim() || null,
+      data_evento:  (fd.get('data')  || '').toString() || null,
+      local:        (fd.get('local') || '').toString().trim() || null,
+      sessao:       sessaoNome || null,
+      sessao_valor: Number(sessaoValorStr) || null,
+      extras_nomes: (fd.get('extras_nomes') || '').toString() || null,
+      extras_valor: Number(fd.get('extras_valor')) || 0,
+      total:        Number(fd.get('total'))        || 0,
+      obs:          (fd.get('obs') || '').toString().trim() || null,
+      status:       'novo',
+      orcamento:    '2026-049'
+    };
+
+    if(!payload.nome || !payload.tel || !sessaoNome){
+      setStatus('Preencha nome, WhatsApp e sessão.', 'err');
+      return;
+    }
+
+    const btn = f.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    setStatus('Salvando no banco de dados…', '');
+
+    try{
+      if(!sb){
+        // fallback offline — só loga no console
+        console.warn('[CRM] Supabase não configurado. Payload:', payload);
+        setStatus('⚠ Supabase não configurado. Veja o console (F12).', 'err');
+      } else {
+        const { data, error } = await sb.from('clientes').insert(payload).select('id').single();
+        if(error) throw error;
+        const newId = data?.id;
+        setStatus('✓ Aprovação enviada! Paulo Anderson recebeu seus dados.', 'ok');
+        const goBtn = $('#btn-go-contract');
+        if(goBtn && newId){
+          goBtn.href = 'contrato-15anos.html?id=' + encodeURIComponent(newId);
+          goBtn.style.display = 'inline-flex';
+        }
+        f.reset();
+        $('#f-data').value = '2026-07-11';
+        recalc();
+        if($('#crm-section').classList.contains('show')) loadCRM();
+      }
+    }catch(err){
+      console.error(err);
+      setStatus('Erro ao enviar: ' + (err.message || err), 'err');
+    }finally{
+      btn.disabled = false;
+      btn.textContent = '✉ Enviar aprovação para Paulo Anderson';
+    }
+  });
+
+  // ---- CRM admin ----
+  async function loadCRM(){
+    const list = $('#crm-list');
+    if(!sb){
+      list.innerHTML = '<div class="crm-empty">⚠ Supabase não configurado. Edite as constantes SUPABASE_URL e SUPABASE_ANON no final do HTML.</div>';
+      return;
+    }
+    list.innerHTML = '<div class="crm-empty">Carregando…</div>';
+    const { data, error } = await sb
+      .from('clientes')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(200);
+    if(error){
+      list.innerHTML = '<div class="crm-empty">Erro: ' + escapeHtml(error.message) + '</div>';
+      return;
+    }
+    if(!data || !data.length){
+      list.innerHTML = '<div class="crm-empty">Nenhum cliente cadastrado ainda.</div>';
+      return;
+    }
+    const rows = data.map(c => {
+      const status = (c.status || 'novo').toLowerCase();
+      const tagClass = {
+        novo:'tag-novo', aprovado:'tag-aprov', pendente:'tag-pend', recusado:'tag-recus'
+      }[status] || 'tag-novo';
+      const statusLabel = {novo:'Novo', aprovado:'Aprovado', pendente:'Pendente', recusado:'Recusado'}[status] || 'Novo';
+      const extras = c.extras_nomes
+        ? '<small style="color:var(--muted);">' + escapeHtml(c.extras_nomes) + '</small>'
+        : '—';
+      return `
+        <tr data-id="${escapeHtml(c.id)}">
+          <td><strong>${escapeHtml(c.nome)}</strong><br><small style="color:var(--muted);">${escapeHtml(c.email||'—')}</small></td>
+          <td>${escapeHtml(c.tel||'—')}</td>
+          <td>${escapeHtml(c.sessao||'—')}<br><small style="color:var(--muted);">${fmtBRL(c.total)}</small></td>
+          <td>${fmtDate(c.data_evento)}<br><small style="color:var(--muted);">${escapeHtml(c.local||'')}</small></td>
+          <td>${extras}</td>
+          <td><span class="tag ${tagClass}">${statusLabel}</span><br><small style="color:var(--muted);">${fmtTs(c.created_at)}</small></td>
+          <td><button class="row-del" data-act="del" title="Excluir">✕</button></td>
+        </tr>`;
+    }).join('');
+
+    list.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>WhatsApp</th>
+            <th>Sessão · Total</th>
+            <th>Data · Local</th>
+            <th>Extras</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  $('#btn-refresh').addEventListener('click', loadCRM);
+
+  $('#crm-list').addEventListener('click', async function(e){
+    const btn = e.target.closest('[data-act="del"]');
+    if(!btn) return;
+    const tr = btn.closest('tr');
+    const id = tr?.dataset.id;
+    if(!id) return;
+    if(!confirm('Excluir este cliente?')) return;
+    if(!sb) return;
+    const { error } = await sb.from('clientes').delete().eq('id', id);
+    if(error){ alert('Erro: ' + error.message); return; }
+    loadCRM();
+  });
+
+  $('#btn-export').addEventListener('click', async function(){
+    if(!sb){ alert('Supabase não configurado.'); return; }
+    const { data } = await sb.from('clientes').select('*').order('created_at', { ascending: false });
+    if(!data) return;
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'crm-pauleanderson-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  $('#btn-clear').addEventListener('click', async function(){
+    if(!confirm('Apagar TODOS os clientes do CRM?')) return;
+    if(!sb) return;
+    const { error } = await sb.from('clientes').delete().gt('id', 0);
+    if(error){ alert('Erro: ' + error.message); return; }
+    loadCRM();
+  });
+
+})();
+</script>
+</body>
+</html>
