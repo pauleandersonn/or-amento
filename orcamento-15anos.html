@@ -535,6 +535,142 @@
     padding: 18px 16px;
   }
 
+  /* ---------- ABOUT / SOBRE ---------- */
+  .about-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 28px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+    align-items: start;
+  }
+  .about-portrait {
+    display: flex;
+    justify-content: center;
+  }
+  .portrait-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid;
+    place-items: center;
+    font-family: 'Georgia', serif;
+    font-size: 56px;
+    color: #1a1a1a;
+    font-weight: 700;
+    box-shadow: 0 12px 32px rgba(212,165,116,.15);
+  }
+  .about-body h4 {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .about-role {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .about-bio {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 22px;
+    max-width: 560px;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+  .stat:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .stat-num {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .about-portfolio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .portfolio-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    transition: all .2s ease;
+  }
+  .portfolio-btn:hover {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(212,165,116,.08), transparent);
+    transform: translateY(-2px);
+  }
+  .portfolio-btn .portfolio-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .portfolio-btn span:not(.portfolio-icon):not(.arrow) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+    min-width: 0;
+  }
+  .portfolio-btn strong {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .portfolio-btn small {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .portfolio-btn .arrow {
+    color: var(--accent);
+    font-size: 18px;
+    transition: transform .2s;
+  }
+  .portfolio-btn:hover .arrow { transform: translateX(3px); }
+
+  @media (max-width: 700px) {
+    .about-card { grid-template-columns: 1fr; padding: 22px; gap: 20px; }
+    .about-portrait { justify-content: flex-start; }
+    .portrait-img { width: 100px; height: 100px; font-size: 40px; }
+    .about-stats { grid-template-columns: repeat(3, 1fr); }
+    .about-portfolio { grid-template-columns: 1fr; }
+  }
+
   /* ---------- FORMULÁRIO DE APROVAÇÃO ---------- */
   .approval {
     background: var(--card);
@@ -968,10 +1104,64 @@
     </a>
   </div>
 
+  <!-- SOBRE O FOTÓGRAFO -->
+  <div class="section" id="sobre">
+    <div class="section-title">
+      <span class="num">05</span>
+      <h3>Sobre mim</h3>
+      <span class="line"></span>
+    </div>
+
+    <div class="about-card">
+      <div class="about-portrait">
+        <div class="portrait-img">PS</div>
+      </div>
+      <div class="about-body">
+        <h4>Pauleanderson Souza</h4>
+        <p class="about-role">Fotógrafo · Filmmaker</p>
+        <p class="about-bio">Há mais de 10 anos registrando momentos que a gente quase esquece de olhar. De casamentos a debutantes, de eventos corporativos a ensaios — sempre com olhar cinematográfico e respeito pela história de cada família.</p>
+
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">anos no mercado</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">200+</div>
+            <div class="stat-label">eventos cobertos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label">premiações</div>
+          </div>
+        </div>
+
+        <div class="about-portfolio">
+          <a class="portfolio-btn" href="https://pauleandersonn.wordpress.com/" target="_blank" rel="noopener">
+            <span class="portfolio-icon">📷</span>
+            <span>
+              <strong>Portfólio de Fotografia</strong>
+              <small>Trabalhos recentes em WordPress</small>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="portfolio-btn" href="https://sites.google.com/view/pauleanderson-souza/p%C3%A1gina-inicial" target="_blank" rel="noopener">
+            <span class="portfolio-icon">🎬</span>
+            <span>
+              <strong>Portfólio Completo</strong>
+              <small>Filmes, making-of e bastidores</small>
+            </span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FORMULÁRIO DE APROVAÇÃO -->
   <div class="section" id="aprovacao">
     <div class="section-title">
-      <span class="num">05</span>
+      <span class="num">06</span>
       <h3>Cadastro & Aprovação</h3>
       <span class="line"></span>
     </div>
