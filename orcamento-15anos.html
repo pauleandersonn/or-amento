@@ -554,14 +554,19 @@
     width: 140px;
     height: 140px;
     border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 12px 32px rgba(212,165,116,.15);
+    border: 2px solid var(--accent);
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  /* Mantém compatibilidade com versão antiga (texto PS) */
+  .portrait-img:not(img) {
     display: grid;
     place-items: center;
     font-family: 'Georgia', serif;
     font-size: 56px;
     color: #1a1a1a;
     font-weight: 700;
-    box-shadow: 0 12px 32px rgba(212,165,116,.15);
   }
   .about-body h4 {
     font-family: 'Georgia', serif;
@@ -618,6 +623,92 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
+
+  /* ---------- VIDEO EMBED ---------- */
+  .about-video {
+    margin-bottom: 24px;
+  }
+  .video-title {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .video-caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .video-caption a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .video-caption a:hover { text-decoration: underline; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .testimonial {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .testimonial-quote {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .testimonial-quote::before {
+    content: "\201C"; /* aspas tipográficas */
+    color: var(--accent);
+    font-size: 32px;
+    line-height: 0;
+    margin-right: 4px;
+    vertical-align: -10px;
+  }
+  .testimonial-author {
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+  }
+  .testimonial-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .testimonial-event {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
   .portfolio-btn {
     display: flex;
     align-items: center;
@@ -669,6 +760,7 @@
     .portrait-img { width: 100px; height: 100px; font-size: 40px; }
     .about-stats { grid-template-columns: repeat(3, 1fr); }
     .about-portfolio { grid-template-columns: 1fr; }
+    .testimonials { grid-template-columns: 1fr; }
   }
 
   /* ---------- FORMULÁRIO DE APROVAÇÃO ---------- */
@@ -1114,7 +1206,14 @@
 
     <div class="about-card">
       <div class="about-portrait">
-        <div class="portrait-img">PS</div>
+        <!--
+          📸 Para trocar pela sua foto real:
+          1. Coloque a imagem na mesma pasta do HTML (ex: pauleanderson.jpg)
+          2. Troque o bloco abaixo:
+             <img class="portrait-img" src="pauleanderson.jpg" alt="Pauleanderson Souza" />
+        -->
+        <img class="portrait-img" src="https://placehold.co/280x280/d4a574/1a1a1a?text=PS&font=playfair-display" alt="Pauleanderson Souza" />
+        <!-- ↑ enquanto não tem foto, usa placeholder dourado com iniciais PS -->
       </div>
       <div class="about-body">
         <h4>Pauleanderson Souza</h4>
@@ -1136,6 +1235,20 @@
           </div>
         </div>
 
+        <div class="about-video">
+          <h5 class="video-title">🎬 Em movimento</h5>
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/o_tVgTgCNbw?rel=0&modestbranding=1"
+              title="Portfólio em vídeo — Pauleanderson Souza"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+          <p class="video-caption">Trechos reais de eventos cobertos. <a href="https://www.youtube.com/playlist?list=PLedHuDhOV6nbyn_k08x_p0gkBlkmU8J2b" target="_blank" rel="noopener">Ver playlist completa no YouTube →</a></p>
+        </div>
+
         <div class="about-portfolio">
           <a class="portfolio-btn" href="https://pauleandersonn.wordpress.com/" target="_blank" rel="noopener">
             <span class="portfolio-icon">📷</span>
@@ -1153,6 +1266,45 @@
             </span>
             <span class="arrow">→</span>
           </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPOIMENTOS -->
+    <div class="testimonials" style="margin-top: 28px;">
+      <!--
+        📝 Para trocar pelos depoimentos reais:
+        1. Substitua o texto entre as <div class="testimonial-quote">...</div>
+        2. Troque o nome em <div class="testimonial-name">...</div>
+        3. Troque o tipo de evento em <div class="testimonial-event">...</div>
+      -->
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          O Paulo registrou a festa da nossa filha com um cuidado que a gente não esperava. Cada foto parecia ter alma. A gente chora toda vez que revê.
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Márcia e Ricardo</div>
+          <div class="testimonial-event">Festa de 15 anos — 2024</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          Profissional impecável. Chegou antes, saiu depois, e ainda entregou o making-of em tempo recorde. Virou parceiro de todas as nossas confraternizações.
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Ana Paula</div>
+          <div class="testimonial-event">Evento corporativo — 2023</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          Olhar cinematográfico mesmo. Não é só foto bonita — é foto que conta uma história. Recomendo de olhos fechados.
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Lucas e Fernanda</div>
+          <div class="testimonial-event">Casamento — 2024</div>
         </div>
       </div>
     </div>
